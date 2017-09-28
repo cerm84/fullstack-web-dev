@@ -74,3 +74,4 @@ typings/
 .env
 
 >>>>>>> fc32f768084c9166a657827dff101f027b091e73
+.vscode/settings.json
