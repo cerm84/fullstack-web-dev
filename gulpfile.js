@@ -33,6 +33,13 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest(DIST_FOLDER));
 });
 
+gulp.task('less', function(){
+	gulp.src(['./less/base.less'])
+		.pipe(less())
+		.pipe(concat(CSS_DIST))
+		.pipe(gulp.dest(DIST_FOLDER));
+});
+
 // Remove all js files from the production folder
 gulp.task('clean-js', function() {
   del([`${DIST_FOLDER}*.js`, ]).then(paths => {
@@ -42,10 +49,12 @@ gulp.task('clean-js', function() {
 
 // Remove all css files from the production folder
 gulp.task('clean-css', function() {
-  // Your code here
+  del([`${DIST_FOLDER}*.css`,]).then(paths => {
+	paths.length && console.log('Remove:\n', paths.join('\n'));
+   });
 });
 
 
-gulp.task('build', ['clean-js', 'scripts']);
+gulp.task('build', ['clean-js', 'scripts', 'clean-css', 'less']);
 
 gulp.task('deploy', ['build']);
